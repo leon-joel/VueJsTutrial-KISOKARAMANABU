@@ -32,7 +32,11 @@ const app = new Vue({
       // ネストしたデータも監視する
       deep: true,
     }
-  }
+  },
+  created() {
+    // インスタンス作成時に自動的に fetch() する
+    this.todos = todoStorage.fetch()
+  },
   methods: {
     doAdd: function (event, value) {
       // ref で名前を付けておいたDOM要素を参照
