@@ -38,7 +38,18 @@ const app = new Vue({
       return this.todos.filter(function (todoItem) {
         return this.current < 0 ? true : this.current === todoItem.state
       }, this)
-    }
+    },
+
+    // キーからラベルを簡単に引けるように対照表を作成
+    //   {0: '作業中', 1: '完了', -1: 'すべて'}
+    // ※算出メソッドの記述がcomputedTodosとちょっと違う（xxx(){} と xxx: function(){}）がどちらでもいいみたい
+    //   いずれにしても、アロー関数は使っちゃいけないようだ。
+    //   [【Vue.js】methods,computed内部でアロー関数を使ってはいけない](https://www.ultra-noob.com/blog/2020/47/)
+    labels() {
+      return this.options.reduce(function (a, b) {
+        return Object.assign(a, { [b.value]: b.label })
+      }, {})
+    },
   },
   watch: {
     todos: {
