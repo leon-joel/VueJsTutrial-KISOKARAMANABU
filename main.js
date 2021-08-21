@@ -23,6 +23,16 @@ const app = new Vue({
   data: {
     todos: [],
   },
+  watch: {
+    todos: {
+      handler: function (todos) {
+        // todos引数には変更後の値が入っている
+        todoStorage.save(todos)
+      },
+      // ネストしたデータも監視する
+      deep: true,
+    }
+  }
   methods: {
     doAdd: function (event, value) {
       // ref で名前を付けておいたDOM要素を参照
