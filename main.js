@@ -22,6 +22,14 @@ const app = new Vue({
   el: '#app',
   data: {
     todos: [],
+    // 絞り込み用の選択肢
+    options: [
+      { value: -1, label: 'すべて' },
+      { value: 0, label: '作業中' },
+      { value: 1, label: '完了' },
+    ],
+    // 選択中オプション
+    current: -1,
   },
   watch: {
     todos: {

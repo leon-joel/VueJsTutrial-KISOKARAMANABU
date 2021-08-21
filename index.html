@@ -8,6 +8,10 @@
 <body>
 <div id="app">
   <!-- 絞り込みラジオボタン -->
+  <label v-for="option in options">
+    <input type="radio" v-model="current" v-bind:value="option.value">
+    {{ option.label }}
+  </label>
   <!-- テーブル -->
   <table>
     <thead>
