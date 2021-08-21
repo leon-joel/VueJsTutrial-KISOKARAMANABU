@@ -23,10 +23,11 @@
         <th>{{ item.id }}</th>
         <td>{{ item.comment }}</td>
         <td class="state">
-          <button>{{ item.state }}</button>
+          <button v-on:click="doChangeState(item)">{{ item.state }}</button>
         </td>
         <td class="button">
-          <button>削除</button>
+          <!-- ※shift+clickで削除出来るようにしている。自分の環境（macos）では、なぜか ctrl, meta, alt は効かなかった。 -->
+          <button v-on:click.shift="doRemove(item)" title="press this button with SHIFT key">削除</button>
         </td>
       </tr>
     </tbody>

@@ -54,6 +54,14 @@ const app = new Vue({
       })
       // フォーム要素を空にする
       comment.value = ''
+    },
+    doChangeState: function (item) {
+      item.state = item.state ? 0 : 1
+    },
+    doRemove: function (item) {
+      var index = this.todos.indexOf(item)
+      // spliceは削除・置換・挿入など色々出来るJSのメソッド。ここではindex番目から1つの要素を削除している。
+      this.todos.splice(index, 1)
     }
   },
 });
