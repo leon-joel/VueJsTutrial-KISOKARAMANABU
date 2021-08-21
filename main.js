@@ -31,6 +31,15 @@ const app = new Vue({
     // 選択中オプション
     current: -1,
   },
+  computed: {
+    // 絞り込み結果を返す算出プロパティ
+    // ※算出プロパティは結果がキャッシュされるので、todosに変更がない限り再計算されない
+    computedTodos: function () {
+      return this.todos.filter(function (todoItem) {
+        return this.current < 0 ? true : this.current === todoItem.state
+      }, this)
+    }
+  },
   watch: {
     todos: {
       handler: function (todos) {
