@@ -19,11 +19,27 @@ var todoStorage = {
 
 // Vueインスタンス
 const app = new Vue({
-  el: #app,
+  el: '#app',
   data: {
     todos: [],
   },
   methods: {
-
+    doAdd: function (event, value) {
+      // ref で名前を付けておいたDOM要素を参照
+      var comment = this.$refs.comment
+      if (!comment.value.length){
+        return
+      }
+      // { 新しいID, コメント, 作業状態 }
+      // というオブジェクトを現在の todos リストへ push
+      // 作業状態「state」はデフォルト「作業中=0」で作成
+      this.todos.push({
+        id: todoStorage.uid++,
+        comment: comment.value,
+        state: 0, // 作業中
+      })
+      // フォーム要素を空にする
+      comment.value = ''
+    }
   },
 });
