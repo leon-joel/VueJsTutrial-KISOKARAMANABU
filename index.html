@@ -29,7 +29,8 @@
         <th>{{ item.id }}</th>
         <td>{{ item.comment }}</td>
         <td class="state">
-          <button v-on:click="doChangeState(item)">{{ labels[item.state] }}</button>
+<!--          <button v-on:click="doChangeState(item)">{{ labels[item.state] }}</button>-->
+          <button v-on:click="doChangeState(item)">{{ lookupStatusLabel(item.state) }}</button>
         </td>
         <td class="button">
           <!-- ※shift+clickで削除出来るようにしている。自分の環境（macos）では、なぜか ctrl, meta, alt は効かなかった。 -->

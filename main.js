@@ -46,8 +46,10 @@ const app = new Vue({
     //   いずれにしても、アロー関数は使っちゃいけないようだ。
     //   [【Vue.js】methods,computed内部でアロー関数を使ってはいけない](https://www.ultra-noob.com/blog/2020/47/)
     labels() {
-      return this.options.reduce(function (a, b) {
-        return Object.assign(a, { [b.value]: b.label })
+      // reduce関数 はRubyの inject と同じ。accum に対して各要素(option)をたたみ込んでいく
+      return this.options.reduce(function (accum, option) {
+        // assign関数は第1引数(accum)に対して、第2引数をマージする
+        return Object.assign(accum, { [option.value]: option.label })
       }, {})
     },
   },
@@ -90,6 +92,14 @@ const app = new Vue({
       var index = this.todos.indexOf(item)
       // spliceは削除・置換・挿入など色々出来るJSのメソッド。ここではindex番目から1つの要素を削除している。
       this.todos.splice(index, 1)
+    },
+    // 対照表を作らずに都度都度Lookupする関数
+    lookupStatusLabel: function (status) {
+      var opt = this.options.find(function (option) {
+        return option.value === status
+      }, this);
+      // ※findで見つからなかったら戻り値 opt は undefined になる
+      return opt.label;
     }
   },
 });
